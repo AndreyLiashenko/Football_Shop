@@ -16,7 +16,7 @@ namespace Football_Shop
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Balls", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
