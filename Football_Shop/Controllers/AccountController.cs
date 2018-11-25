@@ -27,6 +27,7 @@ namespace Football_Shop.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
             if (ModelState.IsValid)
