@@ -25,12 +25,12 @@ namespace Football_Shop.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Ball> Balls { get; set; }
-        public virtual DbSet<Boot> Boots { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<OrderInShop> OrderInShops { get; set; }
-        public virtual DbSet<PurchaseBall> PurchaseBalls { get; set; }
-        public virtual DbSet<PurchaseBoot> PurchaseBoots { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Balls> Balls { get; set; }
+        public virtual DbSet<Boots> Boots { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<OrderInShop> OrderInShop { get; set; }
+        public virtual DbSet<PurchaseBalls> PurchaseBalls { get; set; }
+        public virtual DbSet<PurchaseBoots> PurchaseBoots { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

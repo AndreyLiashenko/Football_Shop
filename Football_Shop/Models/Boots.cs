@@ -12,21 +12,21 @@ namespace Football_Shop.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Ball
+    public partial class Boots
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ball()
+        public Boots()
         {
-            this.PurchaseBalls = new HashSet<PurchaseBall>();
-            this.OrderInShops = new HashSet<OrderInShop>();
+            this.PurchaseBoots = new HashSet<PurchaseBoots>();
+            this.OrderInShop = new HashSet<OrderInShop>();
         }
     
         public int id_product { get; set; }
         public string name_product { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseBall> PurchaseBalls { get; set; }
+        public virtual ICollection<PurchaseBoots> PurchaseBoots { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderInShop> OrderInShops { get; set; }
+        public virtual ICollection<OrderInShop> OrderInShop { get; set; }
     }
 }

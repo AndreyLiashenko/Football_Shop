@@ -17,8 +17,8 @@ namespace Football_Shop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public OrderInShop()
         {
-            this.Balls = new HashSet<Ball>();
-            this.Boots = new HashSet<Boot>();
+            this.Balls = new HashSet<Balls>();
+            this.Boots = new HashSet<Boots>();
         }
     
         public int id_order { get; set; }
@@ -27,8 +27,8 @@ namespace Football_Shop.Models
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ball> Balls { get; set; }
+        public virtual ICollection<Balls> Balls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Boot> Boots { get; set; }
+        public virtual ICollection<Boots> Boots { get; set; }
     }
 }

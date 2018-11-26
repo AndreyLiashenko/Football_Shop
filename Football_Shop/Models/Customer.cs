@@ -17,16 +17,16 @@ namespace Football_Shop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.OrderInShops = new HashSet<OrderInShop>();
+            this.OrderInShop = new HashSet<OrderInShop>();
         }
     
         public int id_customer { get; set; }
-        public string name_surname { get; set; }
-        public string surname_surname { get; set; }
+        public string password { get; set; }
+        public string Name { get; set; }
         public string phone_number { get; set; }
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderInShop> OrderInShops { get; set; }
+        public virtual ICollection<OrderInShop> OrderInShop { get; set; }
     }
 }

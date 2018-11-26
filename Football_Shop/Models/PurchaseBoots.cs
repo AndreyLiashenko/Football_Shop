@@ -12,14 +12,14 @@ namespace Football_Shop.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PurchaseBall
+    public partial class PurchaseBoots
     {
         public int id_purchase { get; set; }
-        public Nullable<int> id_ball { get; set; }
+        public Nullable<int> id_product { get; set; }
         public Nullable<int> price { get; set; }
         public Nullable<int> count_the_product { get; set; }
         public Nullable<System.DateTime> date_of_change { get; set; }
     
-        public virtual Ball Ball { get; set; }
+        public virtual Boots Boots { get; set; }
     }
 }
