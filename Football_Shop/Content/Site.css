@@ -48,21 +48,21 @@ header img {
 }
 
 
-    .text h1, p {
-        display: flex;
-        justify-content: center;
-    }
+.text h1, p {
+    display: flex;
+    justify-content: center;
+}
 
-    .text h1 {
-        font-family: Calibri;
-    }
+.text h1 {
+    font-family: Calibri;
+}
 
-    .text p {
-        padding-left: 80px;
-        padding-right: 80px;
-        font-size: 14pt;
-        line-height: 1.5;
-    }
+.text p {
+    padding-left: 80px;
+    padding-right: 80px;
+    font-size: 14pt;
+    line-height: 1.5;
+}
 
 @media screen and (max-width: 500px) {
     .text p {

@@ -82,5 +82,12 @@ namespace Football_Shop.Controllers
 
             return View(model);
         }
+
+        [Authorize]
+        public ActionResult Logoff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
