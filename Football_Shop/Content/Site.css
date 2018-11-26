@@ -1,1 +1,156 @@
 ﻿
+.navbar {
+    list-style-type: none;
+    background-color: #333;
+    justify-content: flex-start;
+    display: flex;
+}
+
+@media screen and (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+    }
+}
+
+.navbar li {
+    padding: 14px 20px;
+}
+
+.navbar a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+}
+
+.navbar li:hover {
+    background-color: #ddd;
+    color: black;
+    padding: 14px 20px;
+}
+
+body {
+    margin: 0;
+}
+
+header img {
+    width: 100%;
+    height: auto;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+    .text h1, p {
+        display: flex;
+        justify-content: center;
+    }
+
+    .text h1 {
+        font-family: Calibri;
+    }
+
+    .text p {
+        padding-left: 80px;
+        padding-right: 80px;
+        font-size: 14pt;
+        line-height: 1.5;
+    }
+
+@media screen and (max-width: 500px) {
+    .text p {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact {
+    font-family: Calibri;
+    font-size: 14pt;
+    display: flex;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 700px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.content img {
+    display: flex;
+    width: 25px;
+    height: 25px;
+}
+
+.placing_contacts {
+    display: flex;
+    margin-left: 5px;
+    font-style: italic;
+    font-family: Calibri;
+}
+
+.row_for_img {
+    display: flex;
+    align-items: center;
+}
+
+/*div .balls{
+    display: flex;
+    justify-content: space-around;
+}*/
+
+.inscription {
+    font-family: Calibri;
+    font-size: 14pt;
+}
+
+.goods {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 700px) {
+    .goods {
+        flex-direction: column;
+    }
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .product img {
+        width: 300px;
+        height: 300px;
+        display: flex;
+    }
+
+    .product a {
+        text-decoration: none;
+        font-family: Calibri;
+        font-size: 12pt;
+        color: black;
+    }
+

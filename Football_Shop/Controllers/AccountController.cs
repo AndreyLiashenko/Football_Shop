@@ -50,5 +50,37 @@ namespace Football_Shop.Controllers
 
             return View(model);
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // поиск пользователя в бд
+                Customer customer = null;
+                using (CustomerContext db = new CustomerContext())
+                {
+                    customer = db.Customers.FirstOrDefault(u => u.Email == model.Name && u.password == model.Password);
+
+                }
+                if (customer != null)
+                {
+                    FormsAuthentication.SetAuthCookie(model.Name, true);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
+                }
+            }
+
+            return View(model);
+        }
     }
 }

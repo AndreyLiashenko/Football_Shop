@@ -5,30 +5,38 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title – приложение ASP.NET</title>
-
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-  
-    <nav class="navbar navbar-expand-md  navbar-light bg-light fixed-top">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="nav navbar-nav">
-                <li class="nav-link">@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                <li class="nav-link">@Html.ActionLink("О программе", "About", "Home")</li>
-                <li class="nav-link">@Html.ActionLink("Контакт", "Contact", "Home")</li>
-            </ul>
-        </div>
-    </nav>
+
+    <ul class="navbar">
+        <li>@Html.ActionLink("Домашняя страница", "Index", "Balls")</li>
+        <li>@Html.ActionLink("О программе", "About", "Home")</li>
+        <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+        <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
+    </ul>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            m
-            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
+            <p class="contact">Контакты</p>
+            <div class="content">
+                <div class="row_for_img">
+                    <img src="~/Content/Telegram.png" alt="Foto">
+                    <span class="placing_contacts">andrii_liashenko</span>
+                </div>
+                <div class="row_for_img">
+                    <img src="~/Content/gmail.png" alt="Foto">
+                    <span class="placing_contacts">andrey_lyashenko44@gmail.com</span>
+                </div>
+                <div class="row_for_img">
+                    <img src="~/Content/Insta.png" alt="Foto">
+                    <span class="placing_contacts">andrii__liashenko</span>
+                </div>
+            </div>
+            <p>&copy; Футбольный магазин Soccer for Life @DateTime.Now.Year</p>
         </footer>
     </div>
 
