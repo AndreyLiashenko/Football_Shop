@@ -177,9 +177,46 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ball.cs">
+      <DependentUpon>Football_Shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Boot.cs">
+      <DependentUpon>Football_Shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>Football_Shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Football_Shop.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Football_Shop.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Football_Shop.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Football_Shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Football_Shop.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Football_Shop.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderInShop.cs">
+      <DependentUpon>Football_Shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PurchaseBall.cs">
+      <DependentUpon>Football_Shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PurchaseBoot.cs">
+      <DependentUpon>Football_Shop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Football_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -193,8 +230,25 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Football_Shop.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Football_Shop.Context.cs</LastGenOutput>
+      <DependentUpon>Football_Shop.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Football_Shop.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Football_Shop.edmx</DependentUpon>
+      <LastGenOutput>Football_Shop.cs</LastGenOutput>
+    </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\Football_Shop.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Football_Shop.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Football_Shop.edmx.diagram">
+      <DependentUpon>Football_Shop.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -218,6 +272,13 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\Football_Shop.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Football_Shop.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Football_Shop.edmx.diagram">
+      <DependentUpon>Football_Shop.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -262,6 +323,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
