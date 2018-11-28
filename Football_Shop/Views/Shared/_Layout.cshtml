@@ -10,16 +10,27 @@
 </head>
 <body>
 
-    <ul class="navbar">
-        <li>@Html.ActionLink("Домашняя страница", "Index", "Balls")</li>
-        <li>@Html.ActionLink("О программе", "About", "Home")</li>
-        <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-        <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
-        <li>@Html.ActionLink("Вход", "Login", "Account")</li>
-        <li>@Html.ActionLink("Выход", "Logoff", "Account")</li>
-    </ul>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <ul class="navbar">
+            <li>@Html.ActionLink("Домашняя страница", "Index", "Balls")</li>
+            <li>@Html.ActionLink("О программе", "About", "Home")</li>
+            <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+            <li class="user">@User.Identity.Name</li>
+            <li>@Html.ActionLink("Выход", "Logoff", "Account")</li>
+        </ul>
+    } else
+    {
+        <ul class="navbar">
+            <li>@Html.ActionLink("Домашняя страница", "Index", "Balls")</li>
+            <li>@Html.ActionLink("О программе", "About", "Home")</li>
+            <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+            <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
+            <li>@Html.ActionLink("Вход", "Login", "Account")</li>
+            <li>@Html.ActionLink("Выход", "Logoff", "Account")</li>
+        </ul>
+    }
 
-    
     @RenderBody()
     <hr />
     <footer>
@@ -40,7 +51,7 @@
         </div>
         <p>&copy; Футбольный магазин Soccer for Life @DateTime.Now.Year</p>
     </footer>
-    
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
