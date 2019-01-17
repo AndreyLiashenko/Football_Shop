@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Football_Shop.Models.Balls>
+
+@{
+    ViewBag.Title = "Бутсы";
+}
+
+
+
+<div class="bootsImg">
+    @foreach (var item in Model)
+    {
+        <div class="bootsName">
+            <img src="@item.name_img">
+            <a href="/Cart/Add/@item.id_product" id="@item.id_product" data-name="@item.name_product" onclick="edit(@item.id_product)">В корзину</a>
+        </div>
+
+    }
+</div>
+
+
+

@@ -23,6 +23,8 @@ namespace Football_Shop.Models
     
         public int id_product { get; set; }
         public string name_product { get; set; }
+        public string name_img { get; set; }
+        public int Id_new_prod { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseBalls> PurchaseBalls { get; set; }

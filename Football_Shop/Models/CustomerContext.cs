@@ -8,11 +8,11 @@ namespace Football_Shop.Models
 {
     public class CustomerContext : DbContext
     {
-        public CustomerContext() : base("Football_ShopEntities")
+        public CustomerContext() : base("FotballShopEntity")
         {
 
         }
          
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Customers> Customers { get; set; }
     }
 }

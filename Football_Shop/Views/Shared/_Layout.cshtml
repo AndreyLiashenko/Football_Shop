@@ -3,32 +3,44 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
+    <meta name="google-site-verification" content="Z148F90nDcuymwpbWd87KA5HzJIS9_9JdOizn2eCpT4" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title – приложение ASP.NET</title>
+    <meta name="description" content="Лабораторна робота розробка сайта для футбольного магазина" />
+    <meta name="keywords" content="Сайт, Оптимізація, футбольный интернет-магазин, ТІ-61, лабораторна, футбол, бутсы" />
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
 
 </head>
 <body>
-
     @if (User.Identity.IsAuthenticated)
     {
-        <ul class="navbar">
-            <li>@Html.ActionLink("Домашняя страница", "Index", "Balls")</li>
-            <li>@Html.ActionLink("О программе", "About", "Home")</li>
-            <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-            <li class="user">@User.Identity.Name</li>
-            <li>@Html.ActionLink("Выход", "Logoff", "Account")</li>
-        </ul>
-    } else
+        <div class="navbar" id="myTopnav">
+            @Html.ActionLink("Главная страница", "Index", "Home")
+            @Html.ActionLink("Бутсы", "Boots", "Home")
+            @Html.ActionLink("Товары со скидкой", "DiscountBoots", "Home")
+            @Html.ActionLink("Корзина", "Cart", "Cart")
+            <a href="" class="user">@User.Identity.Name</a>
+            @Html.ActionLink("Выход", "Logoff", "Account")
+            
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              Меню
+            </a>
+        </div>
+    }
+    else
     {
-        <ul class="navbar">
-            <li>@Html.ActionLink("Домашняя страница", "Index", "Balls")</li>
-            <li>@Html.ActionLink("О программе", "About", "Home")</li>
-            <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-            <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
-            <li>@Html.ActionLink("Вход", "Login", "Account")</li>
-            <li>@Html.ActionLink("Выход", "Logoff", "Account")</li>
-        </ul>
+        <div class="navbar" id="myTopnav">>
+            @Html.ActionLink("Главная страница", "Index", "Home")
+            @Html.ActionLink("Бутсы", "Boots", "Home")
+            @Html.ActionLink("Товары со скидкой", "DiscountBoots", "Home")
+            @Html.ActionLink("Корзина", "Cart", "Cart")
+            @Html.ActionLink("Регистрация", "Register", "Account")
+            @Html.ActionLink("Вход", "Login", "Account")
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                Меню
+            </a>
+        </div>
     }
 
     @RenderBody()
@@ -49,6 +61,7 @@
                 <span class="placing_contacts">andrii__liashenko</span>
             </div>
         </div>
+        <hr />
         <p>&copy; Футбольный магазин Soccer for Life @DateTime.Now.Year</p>
     </footer>
 
@@ -56,5 +69,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/localeStorage.js"></script>
+    <script src="~/Scripts/navbar.js"></script>
 </body>
 </html>

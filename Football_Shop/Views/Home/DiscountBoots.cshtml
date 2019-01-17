@@ -1,0 +1,28 @@
+﻿@using MongoDB.Driver
+@using Football_Shop.Models
+
+@{
+    string connectionString =
+  @"mongodb://andrey4404:Z3bT7MRrikbZufk338xzEp9U7pdQwPbot7jmtL34xxVKnBsIHI1CJkZyCb4YUbLRuNxoLv0vjvvrlpLhfEBQqw==@andrey4404.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
+    MongoClientSettings settings = MongoClientSettings.FromUrl(
+      new MongoUrl(connectionString)
+    );
+    settings.SslSettings = new SslSettings() { EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 };
+    var mongoClient = new MongoClient(settings);
+    var db = mongoClient.GetDatabase("test");
+    var collection = db.GetCollection<mongoBall>("footballtest").AsQueryable();
+    ViewBag.Title = "Бутсы по скидке";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bootsImg">
+    @foreach (var item in collection)
+    {
+        <div class="bootsName" >
+            <img src="@item.photo">
+            <div>Цена @item.price</div>
+        </div>
+
+    }
+</div>
+

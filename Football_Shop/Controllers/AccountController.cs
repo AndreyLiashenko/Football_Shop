@@ -20,7 +20,7 @@ namespace Football_Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-                Customer customer = null;
+                Customers customer = null;
                 using (CustomerContext db = new CustomerContext())
                 {
                     customer = db.Customers.FirstOrDefault(u => u.Email == model.Name);
@@ -30,7 +30,7 @@ namespace Football_Shop.Controllers
                     // создаем нового пользователя
                     using (CustomerContext db = new CustomerContext())
                     {
-                        db.Customers.Add(new Customer { Email = model.Name, password = model.Password });
+                        db.Customers.Add(new Customers { Email = model.Name, password = model.Password });
                         db.SaveChanges();
 
                         customer = db.Customers.Where(u => u.Email == model.Name && u.password == model.Password).FirstOrDefault();
@@ -63,7 +63,7 @@ namespace Football_Shop.Controllers
             if (ModelState.IsValid)
             {
                 // поиск пользователя в бд
-                Customer customer = null;
+                Customers customer = null;
                 using (CustomerContext db = new CustomerContext())
                 {
                     customer = db.Customers.FirstOrDefault(u => u.Email == model.Name && u.password == model.Password);

@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище FootballShopEntity" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ball">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_product" Type="varchar" MaxLength="30" />
+          <Property Name="name_img" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Balls">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="int" Nullable="false" />
+          <Property Name="name_product" Type="varchar" MaxLength="30" />
+          <Property Name="name_img" Type="varchar" MaxLength="200" />
+          <Property Name="Id_new_prod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Boots">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="int" Nullable="false" />
+          <Property Name="name_product" Type="varchar" MaxLength="30" />
+          <Property Name="img_product" Type="image" />
+          <Property Name="name_img" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id_customer" />
+          </Key>
+          <Property Name="id_customer" Type="int" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="15" />
+          <Property Name="Name" Type="varchar" MaxLength="25" />
+          <Property Name="phone_number" Type="char" MaxLength="12" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="id_customer" />
+          </Key>
+          <Property Name="id_customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="15" />
+          <Property Name="Name" Type="varchar" MaxLength="25" />
+          <Property Name="phone_number" Type="char" MaxLength="12" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Order_Balls">
+          <Key>
+            <PropertyRef Name="id_ball" />
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_ball" Type="int" Nullable="false" />
+          <Property Name="id_order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order_Boots">
+          <Key>
+            <PropertyRef Name="id_boot" />
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_boot" Type="int" Nullable="false" />
+          <Property Name="id_order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderInShop">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="count_the_goods" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseBalls">
+          <Key>
+            <PropertyRef Name="id_purchase" />
+          </Key>
+          <Property Name="id_purchase" Type="int" Nullable="false" />
+          <Property Name="id_ball" Type="int" />
+          <Property Name="price" Type="int" />
+          <Property Name="count_the_product" Type="int" />
+          <Property Name="date_of_change" Type="date" />
+        </EntityType>
+        <EntityType Name="PurchaseBoots">
+          <Key>
+            <PropertyRef Name="id_purchase" />
+          </Key>
+          <Property Name="id_purchase" Type="int" Nullable="false" />
+          <Property Name="id_product" Type="int" />
+          <Property Name="price" Type="int" />
+          <Property Name="count_the_product" Type="int" />
+          <Property Name="date_of_change" Type="date" />
+        </EntityType>
+        <Association Name="FK__Order_Bal__id_ba__5AEE82B9">
+          <End Role="Balls" Type="Self.Balls" Multiplicity="1" />
+          <End Role="Order_Balls" Type="Self.Order_Balls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Balls">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="Order_Balls">
+              <PropertyRef Name="id_ball" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Bal__id_or__5BE2A6F2">
+          <End Role="OrderInShop" Type="Self.OrderInShop" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order_Balls" Type="Self.Order_Balls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInShop">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="Order_Balls">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Boo__id_bo__5CD6CB2B">
+          <End Role="Boots" Type="Self.Boots" Multiplicity="1" />
+          <End Role="Order_Boots" Type="Self.Order_Boots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boots">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="Order_Boots">
+              <PropertyRef Name="id_boot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Boo__id_or__5DCAEF64">
+          <End Role="OrderInShop" Type="Self.OrderInShop" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order_Boots" Type="Self.Order_Boots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInShop">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="Order_Boots">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderInSh__id_us__5EBF139D">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderInShop" Type="Self.OrderInShop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id_customer" />
+            </Principal>
+            <Dependent Role="OrderInShop">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseB__id_ba__5FB337D6">
+          <End Role="Balls" Type="Self.Balls" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PurchaseBalls" Type="Self.PurchaseBalls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Balls">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="PurchaseBalls">
+              <PropertyRef Name="id_ball" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseB__id_pr__60A75C0F">
+          <End Role="Boots" Type="Self.Boots" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PurchaseBoots" Type="Self.PurchaseBoots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boots">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="PurchaseBoots">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище FootballShopEntityContainer">
+          <EntitySet Name="Ball" EntityType="Self.Ball" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Balls" EntityType="Self.Balls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boots" EntityType="Self.Boots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Balls" EntityType="Self.Order_Balls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Boots" EntityType="Self.Order_Boots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderInShop" EntityType="Self.OrderInShop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseBalls" EntityType="Self.PurchaseBalls" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseBoots" EntityType="Self.PurchaseBoots" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Order_Bal__id_ba__5AEE82B9" Association="Self.FK__Order_Bal__id_ba__5AEE82B9">
+            <End Role="Balls" EntitySet="Balls" />
+            <End Role="Order_Balls" EntitySet="Order_Balls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Bal__id_or__5BE2A6F2" Association="Self.FK__Order_Bal__id_or__5BE2A6F2">
+            <End Role="OrderInShop" EntitySet="OrderInShop" />
+            <End Role="Order_Balls" EntitySet="Order_Balls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Boo__id_bo__5CD6CB2B" Association="Self.FK__Order_Boo__id_bo__5CD6CB2B">
+            <End Role="Boots" EntitySet="Boots" />
+            <End Role="Order_Boots" EntitySet="Order_Boots" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Boo__id_or__5DCAEF64" Association="Self.FK__Order_Boo__id_or__5DCAEF64">
+            <End Role="OrderInShop" EntitySet="OrderInShop" />
+            <End Role="Order_Boots" EntitySet="Order_Boots" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderInSh__id_us__5EBF139D" Association="Self.FK__OrderInSh__id_us__5EBF139D">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="OrderInShop" EntitySet="OrderInShop" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseB__id_ba__5FB337D6" Association="Self.FK__PurchaseB__id_ba__5FB337D6">
+            <End Role="Balls" EntitySet="Balls" />
+            <End Role="PurchaseBalls" EntitySet="PurchaseBalls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseB__id_pr__60A75C0F" Association="Self.FK__PurchaseB__id_pr__60A75C0F">
+            <End Role="Boots" EntitySet="Boots" />
+            <End Role="PurchaseBoots" EntitySet="PurchaseBoots" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FootballShopEntity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ball">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_product" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="name_img" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Balls">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="Int32" Nullable="false" />
+          <Property Name="name_product" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="name_img" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Id_new_prod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="PurchaseBalls" Relationship="Self.FK__PurchaseB__id_ba__5FB337D6" FromRole="Balls" ToRole="PurchaseBalls" />
+          <NavigationProperty Name="OrderInShop" Relationship="Self.Order_Balls" FromRole="Balls" ToRole="OrderInShop" />
+        </EntityType>
+        <EntityType Name="Boots">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="Int32" Nullable="false" />
+          <Property Name="name_product" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="img_product" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="name_img" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseBoots" Relationship="Self.FK__PurchaseB__id_pr__60A75C0F" FromRole="Boots" ToRole="PurchaseBoots" />
+          <NavigationProperty Name="OrderInShop" Relationship="Self.Order_Boots" FromRole="Boots" ToRole="OrderInShop" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id_customer" />
+          </Key>
+          <Property Name="id_customer" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="phone_number" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderInShop" Relationship="Self.FK__OrderInSh__id_us__5EBF139D" FromRole="Customer" ToRole="OrderInShop" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="id_customer" />
+          </Key>
+          <Property Name="id_customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="phone_number" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrderInShop">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="count_the_goods" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__OrderInSh__id_us__5EBF139D" FromRole="OrderInShop" ToRole="Customer" />
+          <NavigationProperty Name="Balls" Relationship="Self.Order_Balls" FromRole="OrderInShop" ToRole="Balls" />
+          <NavigationProperty Name="Boots" Relationship="Self.Order_Boots" FromRole="OrderInShop" ToRole="Boots" />
+        </EntityType>
+        <EntityType Name="PurchaseBalls">
+          <Key>
+            <PropertyRef Name="id_purchase" />
+          </Key>
+          <Property Name="id_purchase" Type="Int32" Nullable="false" />
+          <Property Name="id_ball" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="count_the_product" Type="Int32" />
+          <Property Name="date_of_change" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Balls" Relationship="Self.FK__PurchaseB__id_ba__5FB337D6" FromRole="PurchaseBalls" ToRole="Balls" />
+        </EntityType>
+        <EntityType Name="PurchaseBoots">
+          <Key>
+            <PropertyRef Name="id_purchase" />
+          </Key>
+          <Property Name="id_purchase" Type="Int32" Nullable="false" />
+          <Property Name="id_product" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="count_the_product" Type="Int32" />
+          <Property Name="date_of_change" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Boots" Relationship="Self.FK__PurchaseB__id_pr__60A75C0F" FromRole="PurchaseBoots" ToRole="Boots" />
+        </EntityType>
+        <Association Name="FK__PurchaseB__id_ba__5FB337D6">
+          <End Role="Balls" Type="Self.Balls" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PurchaseBalls" Type="Self.PurchaseBalls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Balls">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="PurchaseBalls">
+              <PropertyRef Name="id_ball" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseB__id_pr__60A75C0F">
+          <End Role="Boots" Type="Self.Boots" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PurchaseBoots" Type="Self.PurchaseBoots" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boots">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="PurchaseBoots">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderInSh__id_us__5EBF139D">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderInShop" Type="Self.OrderInShop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id_customer" />
+            </Principal>
+            <Dependent Role="OrderInShop">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Order_Balls">
+          <End Role="Balls" Type="Self.Balls" Multiplicity="*" />
+          <End Role="OrderInShop" Type="Self.OrderInShop" Multiplicity="*" />
+        </Association>
+        <Association Name="Order_Boots">
+          <End Role="Boots" Type="Self.Boots" Multiplicity="*" />
+          <End Role="OrderInShop" Type="Self.OrderInShop" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="FotballShopEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ball" EntityType="Self.Ball" />
+          <EntitySet Name="Balls" EntityType="Self.Balls" />
+          <EntitySet Name="Boots" EntityType="Self.Boots" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="OrderInShop" EntityType="Self.OrderInShop" />
+          <EntitySet Name="PurchaseBalls" EntityType="Self.PurchaseBalls" />
+          <EntitySet Name="PurchaseBoots" EntityType="Self.PurchaseBoots" />
+          <AssociationSet Name="FK__PurchaseB__id_ba__5FB337D6" Association="Self.FK__PurchaseB__id_ba__5FB337D6">
+            <End Role="Balls" EntitySet="Balls" />
+            <End Role="PurchaseBalls" EntitySet="PurchaseBalls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseB__id_pr__60A75C0F" Association="Self.FK__PurchaseB__id_pr__60A75C0F">
+            <End Role="Boots" EntitySet="Boots" />
+            <End Role="PurchaseBoots" EntitySet="PurchaseBoots" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderInSh__id_us__5EBF139D" Association="Self.FK__OrderInSh__id_us__5EBF139D">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="OrderInShop" EntitySet="OrderInShop" />
+          </AssociationSet>
+          <AssociationSet Name="Order_Balls" Association="Self.Order_Balls">
+            <End Role="Balls" EntitySet="Balls" />
+            <End Role="OrderInShop" EntitySet="OrderInShop" />
+          </AssociationSet>
+          <AssociationSet Name="Order_Boots" Association="Self.Order_Boots">
+            <End Role="Boots" EntitySet="Boots" />
+            <End Role="OrderInShop" EntitySet="OrderInShop" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище FootballShopEntityContainer" CdmEntityContainer="FotballShopEntity">
+          <EntitySetMapping Name="Ball">
+            <EntityTypeMapping TypeName="FootballShopEntity.Ball">
+              <MappingFragment StoreEntitySet="Ball">
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="name_product" ColumnName="name_product" />
+                <ScalarProperty Name="name_img" ColumnName="name_img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Balls">
+            <EntityTypeMapping TypeName="FootballShopEntity.Balls">
+              <MappingFragment StoreEntitySet="Balls">
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="name_product" ColumnName="name_product" />
+                <ScalarProperty Name="name_img" ColumnName="name_img" />
+                <ScalarProperty Name="Id_new_prod" ColumnName="Id_new_prod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boots">
+            <EntityTypeMapping TypeName="FootballShopEntity.Boots">
+              <MappingFragment StoreEntitySet="Boots">
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="name_product" ColumnName="name_product" />
+                <ScalarProperty Name="img_product" ColumnName="img_product" />
+                <ScalarProperty Name="name_img" ColumnName="name_img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="FootballShopEntity.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="FootballShopEntity.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderInShop">
+            <EntityTypeMapping TypeName="FootballShopEntity.OrderInShop">
+              <MappingFragment StoreEntitySet="OrderInShop">
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="count_the_goods" ColumnName="count_the_goods" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseBalls">
+            <EntityTypeMapping TypeName="FootballShopEntity.PurchaseBalls">
+              <MappingFragment StoreEntitySet="PurchaseBalls">
+                <ScalarProperty Name="id_purchase" ColumnName="id_purchase" />
+                <ScalarProperty Name="id_ball" ColumnName="id_ball" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="count_the_product" ColumnName="count_the_product" />
+                <ScalarProperty Name="date_of_change" ColumnName="date_of_change" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseBoots">
+            <EntityTypeMapping TypeName="FootballShopEntity.PurchaseBoots">
+              <MappingFragment StoreEntitySet="PurchaseBoots">
+                <ScalarProperty Name="id_purchase" ColumnName="id_purchase" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="count_the_product" ColumnName="count_the_product" />
+                <ScalarProperty Name="date_of_change" ColumnName="date_of_change" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Order_Balls" TypeName="FootballShopEntity.Order_Balls" StoreEntitySet="Order_Balls">
+            <EndProperty Name="Balls">
+              <ScalarProperty Name="id_product" ColumnName="id_ball" />
+            </EndProperty>
+            <EndProperty Name="OrderInShop">
+              <ScalarProperty Name="id_order" ColumnName="id_order" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Order_Boots" TypeName="FootballShopEntity.Order_Boots" StoreEntitySet="Order_Boots">
+            <EndProperty Name="Boots">
+              <ScalarProperty Name="id_product" ColumnName="id_boot" />
+            </EndProperty>
+            <EndProperty Name="OrderInShop">
+              <ScalarProperty Name="id_order" ColumnName="id_order" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

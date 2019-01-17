@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Football_Shop.Models.Product>
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<div class="bootsImg">
+
+    @foreach (var item in Model)
+    {
+    <div class="withProduct">
+
+            <img id="boots" src="@item.Ball.name_img" />
+            @item.Ball.name_product
+            @Html.ActionLink("Купить", "Buy", "Cart", new { id = item.Ball.id_product }, null)
+    </div>
+
+    }
+</div>
+
+@if (Model == null)
+{
+    <div class="withoutProduct">
+        Нет товаров, чтобы добавить нажмите "Добавить товар".
+        
+    </div>
+}
+
+
+

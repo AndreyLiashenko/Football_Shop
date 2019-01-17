@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Football_Shop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,22 +9,21 @@ namespace Football_Shop.Controllers
 {
     public class HomeController : Controller
     {
+        FotballShopEntity fs = new FotballShopEntity();
+
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+       // [HttpGet]
+        public ActionResult Boots()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return View(fs.Balls);
         }
-
-        public ActionResult Contact()
+        
+        public ActionResult DiscountBoots()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

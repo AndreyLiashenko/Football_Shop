@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Football_Shop.Models.Product>
+
+@{
+    ViewBag.Title = "Add";
+
+}
+
+<div class="bootsImg">
+
+    @foreach (var item in Model)
+    {
+    <div class="withProduct">
+
+        <img id="boots" src="@item.Ball.name_img" />
+        @item.Ball.name_product
+        @Html.ActionLink("Купить", "Buy", "Cart", new { id = item.Ball.id_product }, null)
+        <a href="/Cart/Delete/@item.Ball.id_product" id="@item.Ball.id_product" onclick="remove(@item.Ball.id_product)">Удалить с корзины</a>
+    </div>
+
+    }
+</div>
+
+@if (Model.Count() == 0)
+{
+<div class="withoutProduct">
+    Нет товаров, чтобы добавить нажмите @Html.ActionLink("Добавить товар", "Boots", "Home")
+
+</div>
+}

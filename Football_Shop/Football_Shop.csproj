@@ -17,7 +17,7 @@
     <AssemblyName>Football_Shop</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -54,9 +57,24 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MongoDB.Bson, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.7.2\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.7.2\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.7.2\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -158,9 +176,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ball.cs">
+      <DependentUpon>Football_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Balls.cs">
       <DependentUpon>Football_Shop.tt</DependentUpon>
@@ -172,32 +194,40 @@
       <DependentUpon>Football_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerContext.cs" />
-    <Compile Include="Models\Football_Shop.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Football_Shop.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Football_Shop.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Models\Customers.cs">
       <DependentUpon>Football_Shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Football_Shop.Designer.cs">
+    <Compile Include="Models\FootballModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Football_Shop.edmx</DependentUpon>
+      <DependentUpon>FootballModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Identity_Models.cs" />
+    <Compile Include="Models\FootballModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FootballModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FootballModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FootballModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Football_Shop.cs">
+      <DependentUpon>Football_Shop.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\mongoModel.cs" />
     <Compile Include="Models\OrderInShop.cs">
       <DependentUpon>Football_Shop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductContext.cs" />
     <Compile Include="Models\PurchaseBalls.cs">
       <DependentUpon>Football_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PurchaseBoots.cs">
-      <DependentUpon>Football_Shop.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Football_Shop.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,26 +239,42 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Borrussia.jpg" />
+    <Content Include="Content\Football_Forms.jpg" />
+    <Content Include="Content\gmail.png" />
+    <Content Include="Content\Header.jpg" />
+    <Content Include="Content\Header1.jpg" />
+    <Content Include="Content\Insta.png" />
+    <Content Include="Content\Jabulani.jpg" />
+    <Content Include="Content\Mercurial.png" />
+    <Content Include="Content\Nike.jpg" />
+    <Content Include="Content\Select.jpg" />
+    <Content Include="Content\Telegram.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Models\Football_Shop.Context.tt">
+    <Content Include="Models\FootballModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Football_Shop.edmx</DependentUpon>
-      <LastGenOutput>Football_Shop.Context.cs</LastGenOutput>
+      <DependentUpon>FootballModel.edmx</DependentUpon>
+      <LastGenOutput>FootballModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\FootballModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FootballModel.edmx</DependentUpon>
+      <LastGenOutput>FootballModel.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Football_Shop.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Football_Shop.edmx</DependentUpon>
       <LastGenOutput>Football_Shop.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Canvas.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -247,13 +293,14 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\Football_Shop.edmx">
+    <EntityDeploy Include="Models\FootballModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Football_Shop.Designer.cs</LastGenOutput>
+      <LastGenOutput>FootballModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Football_Shop.edmx.diagram">
-      <DependentUpon>Football_Shop.edmx</DependentUpon>
+    <Content Include="Models\FootballModel.edmx.diagram">
+      <DependentUpon>FootballModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\TheFootballShop1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -264,7 +311,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\localeStorage.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\navbar.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -286,8 +335,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -300,6 +347,12 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\Boots.cshtml" />
+    <Content Include="Views\Cart\Details.cshtml" />
+    <Content Include="Views\Cart\Add.cshtml" />
+    <Content Include="Views\Cart\Buy.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\Home\DiscountBoots.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -335,7 +388,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56020</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56020/</IISUrl>
+          <IISUrl>http://localhost/Football_Shop</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
